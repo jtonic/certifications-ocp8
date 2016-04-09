@@ -4,7 +4,23 @@ package ro.jtonic.cert.ocp8.ch1;
  * Created by antonelpazargic on 09/04/16.
  */
 public enum Season {
-    WINTER("low"), SPRING("medium"), SUMMER("high"), FALL("medium");
+    WINTER("low") {
+        public void printHours() {
+            System.out.println("9am - 3pm");
+        }
+    }, SPRING("medium") {
+        public void printHours() {
+            System.out.println("9am - 5pm");
+        }
+    }, SUMMER("high") {
+        public void printHours() {
+            System.out.println("9am - 7pm");
+        }
+    }, FALL("medium") {
+        public void printHours() {
+            System.out.println("9am - 5pm");
+        }
+    };
 
     private String expectedVisitors;
 
@@ -16,10 +32,13 @@ public enum Season {
         System.out.println(this.expectedVisitors);
     }
 
+    public abstract void printHours();
+
     public static void main(String... args) {
         Season s = Season.WINTER;
         System.out.println(s);
         Season.SUMMER.printExpectedVisitors();
+        Season.SUMMER.printHours();
 
         System.out.println(s == Season.WINTER);
 
