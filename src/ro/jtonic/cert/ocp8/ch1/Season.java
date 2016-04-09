@@ -8,19 +8,13 @@ public enum Season {
         public void printHours() {
             System.out.println("9am - 3pm");
         }
-    }, SPRING("medium") {
-        public void printHours() {
-            System.out.println("9am - 5pm");
-        }
-    }, SUMMER("high") {
+    },
+    SPRING("medium"),
+    SUMMER("high") {
         public void printHours() {
             System.out.println("9am - 7pm");
         }
-    }, FALL("medium") {
-        public void printHours() {
-            System.out.println("9am - 5pm");
-        }
-    };
+    }, FALL("medium");
 
     private String expectedVisitors;
 
@@ -32,13 +26,18 @@ public enum Season {
         System.out.println(this.expectedVisitors);
     }
 
-    public abstract void printHours();
+//    public abstract void printHours();
+
+    public void printHours() {
+        System.out.println("9am - 5pm");
+    }
 
     public static void main(String... args) {
         Season s = Season.WINTER;
         System.out.println(s);
         Season.SUMMER.printExpectedVisitors();
         Season.SUMMER.printHours();
+        Season.FALL.printHours();
 
         System.out.println(s == Season.WINTER);
 
