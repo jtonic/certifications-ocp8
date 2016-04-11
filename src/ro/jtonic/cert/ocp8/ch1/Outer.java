@@ -19,14 +19,16 @@ public class Outer {
         }
     }
 
+/*
     private void callInner() {
         Inner inner = new Inner();
         inner.go();
     }
+*/
 
     public static void main(String... args) {
-        Outer outer = new Outer();
-        outer.callInner();
+        Outer.Inner inner = new Outer().new Inner();
+        inner.go();
     }
 
 }
