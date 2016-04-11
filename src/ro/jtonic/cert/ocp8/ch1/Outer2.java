@@ -7,7 +7,7 @@ public class Outer2 {
     private int length = 5;
 
     public void calculate() {
-        final int width = 20;
+        int width = 20;
         class Inner {
             public void multiply() {
                 System.out.println(length * width);
