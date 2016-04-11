@@ -10,12 +10,11 @@ public class AnonInner {
     }
 
     public int admission(int basePrice) {
-        SaleTodayOnly sale = new SaleTodayOnly() {
+        return basePrice - new SaleTodayOnly() {
             int dollarsOff() {
                 return 3;
             }
-        };
-        return basePrice - sale.dollarsOff();
+        }.dollarsOff();
     }
 
     public static void main(String... args) {
