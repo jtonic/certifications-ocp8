@@ -5,13 +5,13 @@ package ro.jtonic.cert.ocp8.ch1;
  */
 public class AnonInner {
 
-    abstract class SaleTodayOnly {
-        abstract int dollarsOff();
+    interface SaleTodayOnly {
+        int dollarsOff();
     }
 
     public int admission(int basePrice) {
         return basePrice - new SaleTodayOnly() {
-            int dollarsOff() {
+            public int dollarsOff() {
                 return 3;
             }
         }.dollarsOff();
