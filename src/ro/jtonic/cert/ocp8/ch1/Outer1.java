@@ -3,7 +3,7 @@ package ro.jtonic.cert.ocp8.ch1;
 /**
  * Created by antonelpazargic on 11/04/16.
  */
-public class Outer {
+public class Outer1 {
 
     private String greeting = "Hi";
 
@@ -27,7 +27,7 @@ public class Outer {
 */
 
     public static void main(String... args) {
-        Outer.Inner inner = new Outer().new Inner();
+        Outer1.Inner inner = new Outer1().new Inner();
         inner.go();
     }
 
