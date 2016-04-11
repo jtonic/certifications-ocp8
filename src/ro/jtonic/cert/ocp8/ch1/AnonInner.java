@@ -2,6 +2,9 @@ package ro.jtonic.cert.ocp8.ch1;
 
 /**
  * Created by antonelpazargic on 11/04/16.
+ *
+ * Anonymous inner class implementing an interface
+ *
  */
 public class AnonInner {
 
