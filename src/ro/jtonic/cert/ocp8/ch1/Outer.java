@@ -10,6 +10,8 @@ public class Outer {
     private class Inner {
         private int repeat = 3;
 
+//        private static boolean shouldNotWork; // static members are not allowed in inner classes
+
         private void go() {
             for(int i = 0; i < repeat; i++) {
                 System.out.println(greeting);
