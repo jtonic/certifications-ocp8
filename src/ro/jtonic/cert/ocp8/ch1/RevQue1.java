@@ -3,7 +3,7 @@ package ro.jtonic.cert.ocp8.ch1;
 /**
  * Created by antonelpazargic on 11/04/16.
  */
-public class RevQue {
+public class RevQue1 {
 
     private static class Employee {
         public int employeeId;
