@@ -1,4 +1,4 @@
-package ro.jtonic.cert.ocp8.ch2;
+package ro.jtonic.cert.ocp8.ch2.pkg;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ public final class Animal {
     private final int age;
     private final List<String> favoriteFoods;
 
-    public Animal(String species, int age, List<String> favoriteFoods) {
+    Animal(String species, int age, List<String> favoriteFoods) {
         this.species = species;
         this.age = age;
         if (favoriteFoods == null) {

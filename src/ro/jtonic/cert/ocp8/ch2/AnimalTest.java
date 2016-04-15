@@ -1,5 +1,8 @@
 package ro.jtonic.cert.ocp8.ch2;
 
+import ro.jtonic.cert.ocp8.ch2.pkg.Animal;
+import ro.jtonic.cert.ocp8.ch2.pkg.AnimalBuilder;
+
 import java.util.*;
 
 /**
@@ -8,7 +11,11 @@ import java.util.*;
 public class AnimalTest {
 
     public static void main(String... args) {
-        Animal a = new Animal("pig", 1, Arrays.asList("meat", "bread"));
+        Animal a = new AnimalBuilder()
+                .setSpecies("pig")
+                .setAge(1)
+                .setFavoriteFoods(Arrays.asList("meat", "bread"))
+                .build();
         System.out.println(a.getSpecies());
         System.out.println(a.getAge());
         System.out.println(a.getFavoriteFoodsCount());
