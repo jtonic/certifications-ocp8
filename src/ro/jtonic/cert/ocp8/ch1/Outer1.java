@@ -7,6 +7,13 @@ public class Outer1 {
 
     private String greeting = "Hi";
 
+    private static class StaticNestedClass {
+        private static int foo;
+        private static int boo() {
+            return 1;
+        }
+    }
+
     private class Inner {
         private int repeat = 3;
 
@@ -29,6 +36,8 @@ public class Outer1 {
     public static void main(String... args) {
         Outer1.Inner inner = new Outer1().new Inner();
         inner.go();
+
+        System.out.println(StaticNestedClass.boo());
     }
 
 }
