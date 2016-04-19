@@ -9,11 +9,15 @@ public class Outer2 {
     public void calculate() {
         int width = 20;
         class Inner {
+//            public static boolean doesntWork; // non final static fields cannot be used in inner classes
+            public static final boolean DOES_WORK = true; // but final static constants can be used in inner classes
+
             public void multiply() {
                 System.out.println(length * width);
             }
         }
         Inner inner = new Inner();
+        System.out.println("Inner.DOES_WORK = " + Inner.DOES_WORK);
         inner.multiply();
     }
 

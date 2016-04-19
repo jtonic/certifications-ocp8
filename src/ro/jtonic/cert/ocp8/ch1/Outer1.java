@@ -17,7 +17,8 @@ public class Outer1 {
     private class Inner {
         private int repeat = 3;
 
-//        private static boolean shouldNotWork; // static members are not allowed in inner classes
+        private static final boolean THIS_WORKS = false; // static members are not allowed but final static constants are allowed
+//        private static boolean thisDoesntWork; // static members are not allowed but final static constants are allowed
 
         private void go() {
             for(int i = 0; i < repeat; i++) {
@@ -36,6 +37,7 @@ public class Outer1 {
     public static void main(String... args) {
         Outer1.Inner inner = new Outer1().new Inner();
         inner.go();
+        System.out.println("Inner.THIS_WORKS: " + Inner.THIS_WORKS);
 
         System.out.println(StaticNestedClass.boo());
     }
