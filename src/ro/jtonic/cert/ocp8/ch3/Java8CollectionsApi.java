@@ -10,9 +10,12 @@ public class Java8CollectionsApi {
     public static void main(String... args) {
         Map<String, String> favorites  = new HashMap<>();
         favorites.put("Jenny", "Bus Tour");
+        favorites.put("Tom", null);
         System.out.println(favorites);
 
-        favorites.put("Jenny", "Tram");
+        favorites.putIfAbsent("Jenny", "Tram");
+        favorites.putIfAbsent("Sam", "Tram");
+        favorites.putIfAbsent("Tom", "Tram");
         System.out.println(favorites);
 
     }
