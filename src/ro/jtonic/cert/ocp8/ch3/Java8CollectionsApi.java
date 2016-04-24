@@ -56,7 +56,19 @@ public class Java8CollectionsApi {
         System.out.println("tom = " + tom);
         System.out.println("counts = " + counts);
 
+        // computeIfAbsent
+        counts.clear();
+        counts.put("Jenny", 0);
+        counts.put("Tom", null);
 
+        Function<String, Integer> mapper3 = (k) -> 1;
+        final Integer jenny1 = counts.computeIfAbsent("Jenny", mapper3);
+        final Integer tom1 = counts.computeIfAbsent("Tom", mapper3);
+        final Integer sam1 = counts.computeIfAbsent("Sam", mapper3);
+        System.out.println("jenny1 = " + jenny1);
+        System.out.println("tom1 = " + tom1);
+        System.out.println("sam1 = " + sam1);
+        System.out.println("counts = " + counts);
 
     }
 }
