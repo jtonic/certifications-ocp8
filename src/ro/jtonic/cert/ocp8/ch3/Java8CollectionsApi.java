@@ -41,5 +41,22 @@ public class Java8CollectionsApi {
         favorites.merge("Jenny", "New Jenny", mapper1);
         favorites.merge("Tom", "Meow", mapper1);
         System.out.println("Merge with a mapper that returns null: " + favorites);
+
+        // computeIfPresent
+        Map<String, Integer> counts = new HashMap<>();
+        counts.put("Jenny", 1);
+        counts.put("Tom", null);
+
+        BiFunction<String, Integer, Integer> mapper2 = (k, v) -> v + 1;
+        final Integer jenny = counts.computeIfPresent("Jenny", mapper2);
+        final Integer sam = counts.computeIfPresent("Sam", mapper2);
+        final Integer tom = counts.computeIfPresent("Tom", mapper2);
+        System.out.println("jenny = " + jenny);
+        System.out.println("sam = " + sam);
+        System.out.println("tom = " + tom);
+        System.out.println("counts = " + counts);
+
+
+
     }
 }
