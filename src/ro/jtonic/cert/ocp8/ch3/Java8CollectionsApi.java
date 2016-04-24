@@ -54,7 +54,12 @@ public class Java8CollectionsApi {
         System.out.println("jenny = " + jenny);
         System.out.println("sam = " + sam);
         System.out.println("tom = " + tom);
-        System.out.println("counts = " + counts);
+        System.out.println("computeIfPresent. counts = " + counts);
+        final Integer jenny2 = counts.computeIfPresent("Jenny", (k, v) -> null);
+        final Integer tom2 = counts.computeIfPresent("Tom", (k, v) -> null);
+        System.out.println("jenny2 = " + jenny2);
+        System.out.println("tom2 = " + tom2);
+        System.out.println("computeIfPresent. special null cases. counts = " + counts);
 
         // computeIfAbsent
         counts.clear();
@@ -65,10 +70,12 @@ public class Java8CollectionsApi {
         final Integer jenny1 = counts.computeIfAbsent("Jenny", mapper3);
         final Integer tom1 = counts.computeIfAbsent("Tom", mapper3);
         final Integer sam1 = counts.computeIfAbsent("Sam", mapper3);
+        final Integer pluto = counts.computeIfAbsent("Pluto", v -> null);
         System.out.println("jenny1 = " + jenny1);
         System.out.println("tom1 = " + tom1);
         System.out.println("sam1 = " + sam1);
-        System.out.println("counts = " + counts);
+        System.out.println("pluto = " + pluto);
+        System.out.println("computeIfAbsent. counts = " + counts);
 
     }
 }
