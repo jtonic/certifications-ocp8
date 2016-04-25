@@ -45,6 +45,12 @@ public class MethodReferences {
         System.out.println("strs " + strs);
         System.out.println("strs.size() = " + strs.size());
 
+        final List<Integer> ints = Arrays.asList(1, 2, 3, 4);
+        System.out.println("[before] ints = " + ints);
+        ints.replaceAll(i -> i * 2);
+        System.out.println("[after] ints = " + ints);
+
+        ints.forEach(System.out::println);
     }
 
 
