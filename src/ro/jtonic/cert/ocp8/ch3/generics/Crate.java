@@ -15,7 +15,7 @@ public class Crate<T> {
         this.contents = contents;
     }
 
-    private static class Elephant {
+    static class Elephant {
         private String name;
 
         public Elephant(String name) {
@@ -33,7 +33,7 @@ public class Crate<T> {
 
     }
 
-    private static class Zebra {
+    static class Zebra {
         private String name;
 
         public Zebra(String name) {
