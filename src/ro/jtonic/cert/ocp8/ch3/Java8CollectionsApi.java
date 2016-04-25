@@ -19,7 +19,7 @@ public class Java8CollectionsApi {
         favorites.putIfAbsent("Tom", "Tram");
         System.out.println("After putIfAbsent: " + favorites);
 
-//        ===================
+        // simple merge function
         favorites.clear();
         favorites.put("Jenny", "Bus Tour");
         favorites.put("Tom", "Tram");
@@ -55,6 +55,10 @@ public class Java8CollectionsApi {
         System.out.println("sam = " + sam);
         System.out.println("tom = " + tom);
         System.out.println("computeIfPresent. counts = " + counts);
+
+        counts.clear();
+        counts.put("Jenny", 1);
+        counts.put("Tom", null);
         final Integer jenny2 = counts.computeIfPresent("Jenny", (k, v) -> null);
         final Integer tom2 = counts.computeIfPresent("Tom", (k, v) -> null);
         System.out.println("jenny2 = " + jenny2);
@@ -76,6 +80,14 @@ public class Java8CollectionsApi {
         System.out.println("sam1 = " + sam1);
         System.out.println("pluto = " + pluto);
         System.out.println("computeIfAbsent. counts = " + counts);
+
+        // computeIfAbsent. special null cases
+        counts.clear();
+        counts.put("Tom", null);
+        final Integer tom3 = counts.computeIfAbsent("Tom", k -> null);
+        System.out.println("tom3 = " + tom3);
+        System.out.println("ComputeIfAbsent. Special cases. null value and null result from the mapper. counts = " + counts);
+
 
     }
 }
