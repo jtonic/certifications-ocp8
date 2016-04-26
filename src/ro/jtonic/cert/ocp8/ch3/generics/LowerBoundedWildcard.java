@@ -14,13 +14,12 @@ public class LowerBoundedWildcard {
         addSound(strings);
         addSound(objects);
 
+        strings.forEach(System.out::println);
+        objects.forEach(System.out::println);
     }
 
-    private static void addSound(List<? extends Object> list) {
-        // uncomment the following and java won't compile
-        // even in the case of List<?> the code bellow won't compile
-        // list.add("quack");
+    private static void addSound(List<? super String> list) {
+        list.add("quack");
     }
-
 
 }
