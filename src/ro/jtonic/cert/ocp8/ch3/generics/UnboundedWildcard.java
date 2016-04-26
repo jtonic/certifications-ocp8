@@ -12,14 +12,15 @@ public class UnboundedWildcard {
         keywords.add("java");
         printList(keywords);
 
-        List<Integer> integers = new ArrayList<>();
+/*        List<Integer> integers = new ArrayList<>();
         integers.add(new Integer(1));
         List<Object> objects = integers;
         objects.add("two");
         System.out.println(objects.get(1));
+*/
     }
 
-    private static void printList(List<Object> list) {
+    private static void printList(List<?> list) {
         for (Object x: list) System.out.println(x);
     }
 
