@@ -63,6 +63,16 @@ public class Crate<T> {
         // The following doesn't compile
         // crateForElephant.packCrate(new Zebra("Mimi"));
         // crateForZebra.packCrate("zebra1");
+
+        // use a parametrized static method
+        Crate.ship(new Elephant("insignificant"));
+    }
+
+    public static <U> Crate<U> ship(U shippable) {
+        System.out.println("Crate for " + shippable);
+        final Crate<U> crate = new Crate<>();
+        crate.packCrate(shippable);
+        return crate;
     }
 
 }
