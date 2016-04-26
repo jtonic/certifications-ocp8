@@ -1,6 +1,7 @@
 package ro.jtonic.cert.ocp8.ch3.generics;
 
 import java.util.*;
+import java.io.*;
 
 /**
  * Created by antonelpazargic on 26/04/16.
@@ -20,6 +21,13 @@ public class LowerBoundedWildcard {
 
     private static void addSound(List<? super String> list) {
         list.add("quack");
+    }
+
+    private void trickyAdd() {
+        List<? super IOException> exceptions = new ArrayList<>();
+        exceptions.add(new IOException());
+        exceptions.add(new FileNotFoundException());
+        exceptions.add(new Exception());
     }
 
 }
