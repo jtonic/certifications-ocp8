@@ -16,6 +16,9 @@ public class FunctionTest {
         System.out.println(lettersCount.apply("Antonel"));
 
         System.out.println(lettersCount.andThen(i -> i % 2).apply("jtonic"));
+
+        BiFunction<String, String, String> concat = String::concat;
+        System.out.println(concat.apply("Antonel ", "Pazargic"));
     }
 
 }
