@@ -18,9 +18,18 @@ public class OptionalTest {
             System.out.println(empty.get());
         } else {
             System.out.println("The optional is empty");
-            empty.get();
+            //            empty.get();
         }
 
         empty.ifPresent(System.out::println);
+
+        System.out.println(empty.orElse("n/a"));
+        System.out.println(empty.orElseGet(() -> "not available"));
+
+        Optional<Double> o2 = Optional.empty();
+        final Double no = o2.orElse(Double.NaN);
+        System.out.println(no);
+
+        empty.orElseThrow(() -> new RuntimeException("The optional is empty"));
     }
 }
