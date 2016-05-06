@@ -13,7 +13,10 @@ public class StreamTest {
         final long c1 = Stream.<String>empty().count();
         System.out.println("c1 = " + c1);
 
-        final boolean allMatch = Stream.of(1, 2, 3).allMatch(i -> i > 0);
+        final Stream<Integer> s0 = Stream.of(1, 2, 3);
+        System.out.println("stream: " + s0);
+
+        final boolean allMatch = s0.allMatch(i -> i > 0);
         System.out.println("allMatch = " + allMatch);
 
         final boolean noneMatch = Stream.of(-1, -2, -3).noneMatch(i -> i >= 0);
@@ -21,10 +24,22 @@ public class StreamTest {
 
         Arrays.asList(1, 2, 3, 4, 5).stream().filter(i -> i % 2 == 0).forEach(System.out::println);
 
-        Stream.iterate(1, i -> i + 2).forEach(System.out::println); // this hangs since it is an infinite stream.
+        System.out.println("Stream#anyMatch can transform an infinite stream into a finite one");
+        Stream.iterate(1, i -> i + 1).peek(System.out::println).anyMatch(i -> i >= 2);
 
-        final Stream<Double> s1 = Stream.generate(Math::random);
-        s1.forEach(System.out::println); //this hangs because s1 is an infinite stream
+        Stream.generate(Math::random).findFirst().ifPresent(d -> System.out.println("First element = " + d));
+        final Integer in = Stream.iterate(1, i -> i + 1).findAny().orElse(-1);
+        System.out.println("findAny: " + in);
+
+        final List<Integer> collector1 = Arrays.asList(1, 2, 3, 4, 5).stream().collect(Collectors.toList());
+        System.out.println("collector1 = " + collector1);
+
+        // Stream.iterate(1, i -> i + 2).forEach(System.out::println); // this hangs since it is an infinite stream.
+        //
+        // final Stream<Double> s1 = Stream.generate(Math::random);
+        // s1.forEach(System.out::println); //this hangs because s1 is an infinite stream
+
+
 
     }
 
