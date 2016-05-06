@@ -20,6 +20,12 @@ public class StreamTest {
         System.out.println("noneMatch = " + noneMatch);
 
         Arrays.asList(1, 2, 3, 4, 5).stream().filter(i -> i % 2 == 0).forEach(System.out::println);
+
+        Stream.iterate(1, i -> i + 2).forEach(System.out::println); // this hangs since it is an infinite stream.
+
+        final Stream<Double> s1 = Stream.generate(Math::random);
+        s1.forEach(System.out::println); //this hangs because s1 is an infinite stream
+
     }
 
 }
