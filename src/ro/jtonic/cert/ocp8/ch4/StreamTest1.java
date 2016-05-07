@@ -7,7 +7,7 @@ import java.util.stream.*;
 /**
  * Created by antonelpazargic on 06/05/16.
  */
-public class StreamTest {
+public class StreamTest1 {
 
     public static void main(String... args) {
         final long c1 = Stream.<String>empty().count();
