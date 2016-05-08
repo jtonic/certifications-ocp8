@@ -26,6 +26,36 @@ public class PrimitiveStreamTest {
         System.out.println("==== generate primitives streams using Random=======");
         new Random().ints(5).forEach(System.out::println);
         new Random().doubles(5).forEach(System.out::println);
+
+        System.out.println("conversion of streams");
+        IntStream.rangeClosed(1, 10).mapToObj(Integer::valueOf).forEach(System.out::println);
+        IntStream.range(1, 6).mapToDouble(Double::valueOf).forEach(System.out::println);
+
+        System.out.println("conversion from of stream of Strings to a stream of integers.");
+        Stream<String> str1 = Stream.of("Penguin", "Fish");
+        str1.mapToInt(String::length).forEach(System.out::println);
+
+        IntStream.rangeClosed(1, 5).mapToObj(new IntFunction<String>() {
+            @Override
+            public String apply(int value) {
+                return Integer.toString(value);
+            }
+        }).forEach(System.out::println);
+
+        IntStream.rangeClosed(1, 5).map(new IntUnaryOperator() {
+            @Override
+            public int applyAsInt(int operand) {
+                return operand * 2;
+            }
+        }).forEach(System.out::println);
+
+        IntStream.rangeClosed(1, 5).mapToDouble(new IntToDoubleFunction() {
+            @Override
+            public double applyAsDouble(int value) {
+                return value;
+            }
+        }).forEach(System.out::println);
+
     }
 
 }
