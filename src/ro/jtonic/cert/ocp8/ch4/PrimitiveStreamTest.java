@@ -56,6 +56,56 @@ public class PrimitiveStreamTest {
             }
         }).forEach(System.out::println);
 
+
+        System.out.println("===== Optionals for primitives======");
+        final OptionalDouble avg = IntStream.rangeClosed(1, 10).average();
+        if (avg.isPresent()) {
+            System.out.println("Average: " + avg.getAsDouble());
+        } else {
+            System.out.println("n/a");
+        }
+
+        final double avg2 = avg.orElseGet(new DoubleSupplier() {
+            @Override
+            public double getAsDouble() {
+                return Double.NaN;
+            }
+        });
+        System.out.println("Average: " + avg2);
+
+
+        DoubleStream str2 = DoubleStream.of(1, 10);
+        final double sum1 = str2.sum();
+        System.out.println("sum1: " + sum1);
+
+        // The next stream pipeline of operations will run infinitely
+        // DoubleStream str3 = DoubleStream.generate(Math::random);
+        // final double sum2 = str3.sum();
+        // System.out.println("sum2: " + sum2);
+
+        System.out.println("Compute the subtract between the max and min of the ints in the stream");
+        int range = range(IntStream.rangeClosed(1, 10));
+        System.out.println(range);
+
+        max(IntStream.empty());
+    }
+
+    private static int max(IntStream ints) {
+        OptionalInt maxOpt = ints.max();
+        return maxOpt.orElseThrow(() -> new RuntimeException("Cannot compute max for no data"));
+    }
+
+    /**
+     * This returns the substract between the max and min value of the ints stream
+     * @param ints
+     * @return
+     */
+    private static int range(IntStream ints) {
+        IntSummaryStatistics stats = ints.summaryStatistics();
+        if (stats.getCount() == 0) {
+            throw new RuntimeException("Cannot perform statistics on an empty stream");
+        }
+        return stats.getMax() - stats.getMin();
     }
 
 }
