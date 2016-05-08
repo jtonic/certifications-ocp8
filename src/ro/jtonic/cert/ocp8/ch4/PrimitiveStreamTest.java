@@ -14,11 +14,18 @@ public class PrimitiveStreamTest {
         final Integer sum = Stream.of(ints).reduce(0, (a, b) -> a + b);
         System.out.println("sum = " + sum);
 
-        IntStream intStream1 = Stream.of(ints).mapToInt(x -> x);
-        System.out.println("intStream1.sum() = " + intStream1.sum());
+        IntStream is1 = Stream.of(ints).mapToInt(x -> x);
+        System.out.println("is1.sum() = " + is1.sum());
 
-        IntStream intStream2 = IntStream.of(1, 2, 3, 4);
-        intStream2.average().ifPresent(System.out::println);
+        IntStream is2 = IntStream.of(1, 2, 3, 4);
+        is2.average().ifPresent(System.out::println);
+
+        IntStream.range(1, 6).forEach(System.out::println);
+        IntStream.rangeClosed(1, 5).forEach(System.out::println);
+
+        System.out.println("==== generate primitives streams using Random=======");
+        new Random().ints(5).forEach(System.out::println);
+        new Random().doubles(5).forEach(System.out::println);
     }
 
 }
