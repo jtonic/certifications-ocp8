@@ -7,7 +7,7 @@ import java.util.function.*;
 /**
  * Created by antonelpazargic on 08/05/16.
  */
-public class PrimitiveStreamTest {
+public class PrimitiveStreamTest1 {
 
     public static void main(String... args) {
         final Integer[] ints = {1, 2, 3, 4};
