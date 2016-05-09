@@ -36,6 +36,17 @@ public class PrimitiveStreamTest2 {
         System.out.println("uo1" + uo1.applyAsInt(-1));
         System.out.println("uo2" + uo2.applyAsInt(-2));
 
+        ToIntFunction<String> tif1 = s -> Integer.parseInt(s);
+        ToIntFunction<String> tif2 = Integer::parseInt;
+        System.out.println("tif1= " + tif1.applyAsInt("1"));
+        System.out.println("tif2= " + tif2.applyAsInt("100"));
+
+        ToIntBiFunction<String, Integer> tibf1 = (s, i) -> Integer.parseInt(s) + i;
+        System.out.println("tibf: " + tibf1.applyAsInt("1", Integer.valueOf(2)));
+
+        IntToLongFunction ilf = i -> i;
+        System.out.println("ilf= " + ilf.applyAsLong(100));
+        System.out.println("ilf2= " + ilf.applyAsLong(-200));
 
         // Streams are lazy evaluated
         List<Integer> ints = new ArrayList<>();
@@ -45,6 +56,12 @@ public class PrimitiveStreamTest2 {
         Stream<Integer> intSt = ints.stream();
         ints.add(4);
         System.out.println("Number of integers in the stream: " + intSt.count());
+
+        IntStream.iterate(0, i -> i + 1).limit(5).forEach(System.out::println);
+
+        Stream.iterate("", s -> "" + Math.random()).limit(2).forEach(System.out::println);
+
+        IntStream.iterate(0, i -> i++).limit(5).forEach(System.out::println);
     }
 
 }
