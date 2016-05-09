@@ -1,6 +1,8 @@
 package ro.jtonic.cert.ocp8.ch4;
 
 import java.util.function.*;
+import java.util.*;
+import java.util.stream.*;
 
 /**
  * Created by antonelpazargic on 08/05/16.
@@ -34,6 +36,15 @@ public class PrimitiveStreamTest2 {
         System.out.println("uo1" + uo1.applyAsInt(-1));
         System.out.println("uo2" + uo2.applyAsInt(-2));
 
+
+        // Streams are lazy evaluated
+        List<Integer> ints = new ArrayList<>();
+        ints.add(1);
+        ints.add(2);
+        ints.add(3);
+        Stream<Integer> intSt = ints.stream();
+        ints.add(4);
+        System.out.println("Number of integers in the stream: " + intSt.count());
     }
 
 }
