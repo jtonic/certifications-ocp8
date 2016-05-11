@@ -1,6 +1,8 @@
 package ro.jtonic.cert.ocp8.ch5.localization;
 
 import java.util.*;
+import java.text.*;
+
 /**
  * Created by antonelpazargic on 11/05/16.
  */
@@ -23,7 +25,8 @@ public class ResourceBundleTest {
 
         System.out.println("RO hello: " + rbRo.getString("hello"));
         System.out.println("RO open: " + rbRo.getString("open"));
-        System.out.println("Default name for ro_RO: " + rbRo.getString("name"));
+        final String roName = MessageFormat.format(rbRo.getString("name"), "Bucuresti, Ferentari");
+        System.out.println("Name for ro_RO: " + roName);
 
         System.out.println("fr_CA hello: " + rbCaFr.getString("hello"));
         System.out.println("fr_CA open: " + rbCaFr.getString("open"));
@@ -36,7 +39,7 @@ public class ResourceBundleTest {
         System.out.println("==============");
         Properties propsRo = new Properties();
         rbRo.keySet().stream().forEach(k -> propsRo.put(k, rbRo.getString(k)));
-        System.out.println("propsRo.getProperty(\"name\") = " + propsRo.getProperty("name"));
+        System.out.println("propsRo.getProperty(\"name\") = " + MessageFormat.format(propsRo.getProperty("name"), "Bucuresti, Baneasa"));
         System.out.println("propsRo.getProperty(\"hello\") = " + propsRo.getProperty("hello"));
         System.out.println("propsRo.getProperty(\"open\") = " + propsRo.getProperty("open"));
         System.out.println("propsRo.getProperty(\"missing\", \"n/a\") = " + propsRo.getProperty("missing", "n/a"));
