@@ -42,6 +42,19 @@ public class ResourceBundleTest {
         System.out.println("propsRo.getProperty(\"missing\", \"n/a\") = " + propsRo.getProperty("missing", "n/a"));
         System.out.println("propsRo.get(\"hello\") = " + propsRo.get("hello"));
         System.out.println("propsRo.get(\"missing\") = " + propsRo.get("missing"));
+
+        System.out.println("Get german translations from the java class");
+        System.out.println("========================");
+        ResourceBundle rbDe = ResourceBundle.getBundle("ro.jtonic.cert.ocp8.ch5.localization.Zoo", Locale.GERMANY);
+        System.out.println("rbDe.getString(\"name\") = " + rbDe.getString("name"));
+        System.out.println("rbDe.getString(\"hello\") = " + rbDe.getString("hello"));
+        System.out.println("rbDe.getString(\"open\") = " + rbDe.getString("open"));
+        System.out.println("(Integer)rbDe.getObject(\"ticket_price\") = " + (Integer)rbDe.getObject("ticket_price"));
+        // System.out.println("rbDe.getString(\"missing\") = " + rbDe.getString("missing")); // the missing key throws and runtime exception
+        // Exception in thread "main" java.util.MissingResourceException: Can't find resource for bundle java.util.PropertyResourceBundle, key missing
+        // Use java.util.Properties to get null or to use a default value
+
+
     }
 
 }
