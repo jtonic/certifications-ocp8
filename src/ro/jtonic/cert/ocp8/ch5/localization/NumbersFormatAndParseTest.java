@@ -71,5 +71,9 @@ public class NumbersFormatAndParseTest {
         // System.out.println("nfDefLoc.parse(\"x1002\") = " + nfDefLoc.parse("x1002")); // runtime exception java.text.ParseException: Unparseable number: "x1002"
 
         System.out.println("efCurDef.parse(\"RON3,100.23\") = " + efCurDef.parse("RON3,100.23"));
+
+
+        NumberFormat curNf = NumberFormat.getCurrencyInstance(Locale.US);
+        System.out.println("curNf.parse(\"$1,000,000.25\") = " + curNf.parse("$1,000,000.25"));
     }
 }
