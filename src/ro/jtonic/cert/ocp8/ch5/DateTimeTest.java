@@ -2,6 +2,7 @@ package ro.jtonic.cert.ocp8.ch5;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.concurrent.*;
 import java.time.temporal.*;
 
@@ -11,6 +12,12 @@ import java.time.temporal.*;
 public class DateTimeTest {
 
     public static void main(String... args) throws InterruptedException {
+        final Instant inst1 = Instant.now();
+        final ZonedDateTime zdt2 = inst1.atZone(ZoneId.of("US/Eastern"));
+        System.out.println(zdt2);
+        // final DateTimeFormatter dtf10 = DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT);
+        // System.out.println("dtf10.format(inst1) = " + dtf10.format(inst1));
+
         LocalDate now = LocalDate.now();
         final LocalDate lastDayForExamPrep = now.plusDays(62);
         String ldep = lastDayForExamPrep.format(DateTimeFormatter.ofPattern("EEEE, dd MMMM YYYY"));
