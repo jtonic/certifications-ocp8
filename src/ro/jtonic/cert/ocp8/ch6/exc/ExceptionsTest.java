@@ -4,13 +4,17 @@ import java.io.*;
 import java.sql.*;
 import java.time.*;
 import java.time.format.*;
-import java.io.*;
+import java.text.ParseException;
+
 /**
  * Created by antonelpazargic on 18/05/16.
  */
 public class ExceptionsTest {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws ParseException, IOException {
+
+        parse();
+
         printName1("users");
 
         printName("users");
@@ -85,6 +89,20 @@ public class ExceptionsTest {
             e = new SQLException(e);
             e.printStackTrace();
         }
+    }
+
+    // re-throwing exception better with the multi catch
+    private static void parse() throws ParseException, IOException {
+        try {
+            doParse();
+        } catch (ParseException | IOException e) {
+            System.out.println(e);
+            throw e;
+        }
+    }
+
+    private static void doParse() throws ParseException, IOException {
+        System.out.println("Parsing....");
     }
 
 }
