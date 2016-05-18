@@ -2,12 +2,21 @@ package ro.jtonic.cert.ocp8.ch6.exc;
 
 import java.io.*;
 import java.sql.*;
+import java.time.*;
+import java.time.format.*;
+import java.io.*;
 /**
  * Created by antonelpazargic on 18/05/16.
  */
 public class ExceptionsTest {
 
     public static void main(String... args) {
+        printName1("users");
+
+        printName("users");
+
+        System.out.println("getTime(\"10:11\") = " + getTime("10:11"));
+        
         Cage cage = new Cage(3, 10, -5);
         System.out.println("cage.getVolume() = " + cage.getVolume());
 
@@ -39,6 +48,43 @@ public class ExceptionsTest {
 
     private static byte[] loadData(String query) throws SQLException { // this is allowed even if the checked exception is not thrown
         throw new UnsupportedOperationException("It is not implemented yet");
+    }
+
+    private static byte[] loadFile(String fileName) {
+        try {
+            throw new FileNotFoundException("The file is not found");
+        // the following doesn't compile because the exceptions are related.
+        // } catch (IOException | FileNotFoundException e) {
+        //     e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
+
+    private static LocalTime getTime(String time) {
+        // the following throws a runtime/unchecked exception
+        // java.time.format.DateTimeParseException: Text 'Jan 2016' could not be parsed at index 0
+        return LocalTime.parse("Jan 2016", DateTimeFormatter.ofPattern("hh:mm"));
+    }
+
+    // The caught exception local variable is not effective final in normal try/catch but it is in the try/multi-catch
+    private static void printName(String name) {
+        try {
+            throw new RuntimeException("invalid table name");
+        } catch (RuntimeException e) {
+            e = new IllegalArgumentException(e);
+            throw e;
+        }
+    }
+
+    private static void printName1(String name) {
+        try {
+            throw new SQLTransientException("Invalid table name");
+        } catch (SQLException e) {
+            e = new SQLException(e);
+            e.printStackTrace();
+        }
     }
 
 }
