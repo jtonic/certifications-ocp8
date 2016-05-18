@@ -26,9 +26,7 @@ public class ExceptionsTest {
     private static void fee() {
         try {
             loadData("select 1 from dual");
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
+        } catch (RuntimeException | SQLException e) {
             e.printStackTrace();
         // the following catch clause doesn't compile cause the IllegalArgumentException is a subclass of the RuntimeException which is already caught
         // } catch (IllegalArgumentException e) {
