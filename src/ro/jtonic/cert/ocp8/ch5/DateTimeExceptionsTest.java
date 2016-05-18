@@ -10,6 +10,20 @@ import java.util.concurrent.TimeUnit;
 public class DateTimeExceptionsTest {
 
     public static void main(String... args) {
+        LocalDate ld = LocalDate.now();
+
+        // The following formatting doesn't work
+        // java.time.temporal.UnsupportedTemporalTypeException: Unsupported field: ClockHourOfAmPm
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("hh:mm");
+        System.out.println("ld.format(dtf) = " + ld.format(dtf));
+
+        Duration d = Duration.ofHours(1);
+        // The duration cannot be added to a LocalDate
+        // java.time.temporal.UnsupportedTemporalTypeException: Unsupported unit: Seconds
+        ld.plus(d);
+        System.out.println("d = " + d);
+        System.out.println("ld = " + ld);
+
         // LocalDate.of(2016, Month.JANUARY, 32); //java.time.DateTimeException: Invalid value for DayOfMonth (valid values 1 - 28/31): 32
 
         // LocalTime.of(25, 10); //java.time.DateTimeException: Invalid value for HourOfDay (valid values 0 - 23): 25

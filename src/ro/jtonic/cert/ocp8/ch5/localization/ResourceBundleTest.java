@@ -19,9 +19,16 @@ public class ResourceBundleTest {
         ResourceBundle rbCaFr = ResourceBundle.getBundle("ro.jtonic.cert.ocp8.ch5.localization.Zoo", caFr);
         ResourceBundle rbRo = ResourceBundle.getBundle("ro.jtonic.cert.ocp8.ch5.localization.Zoo", ro);
 
+        // the following properties file resource bundle is missing.
+        // java.util.MissingResourceException: Can't find bundle for base name ro.jtonic.cert.ocp8.ch5.localization.ZooRomania, locale ro_RO
+        ResourceBundle rbRo1 = ResourceBundle.getBundle("ro.jtonic.cert.ocp8.ch5.localization.ZooRomania", ro);
+
         System.out.println("US hello: " + rbUs.getString("hello"));
         System.out.println("US open: " + rbUs.getString("open"));
         System.out.println("Default name for en_US: " + rbUs.getString("name"));
+
+        // the following resource key is missing
+        System.out.println("US hello: " + rbUs.getString("hi")); // java.util.MissingResourceException: Can't find resource for bundle java.util.PropertyResourceBundle, key hi
 
         System.out.println("RO hello: " + rbRo.getString("hello"));
         System.out.println("RO open: " + rbRo.getString("open"));
