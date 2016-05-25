@@ -28,14 +28,16 @@ public class ConcurrentCollectionsTest {
     }
 
     private static void testBlockingQueue() {
-        BlockingQueue<Integer> blQue1 = new LinkedBlockingQueue<>();
+        BlockingQueue<Integer> blQue1 = new LinkedBlockingQueue<>(1);
 
         ExecutorService service = null;
         try {
             service = Executors.newCachedThreadPool();
             service.submit(() -> {
                 try {
-                    Integer in = blQue1.take();
+                    // Integer in = blQue1.take(); // this runs continuously until an element is available in the BlockingQueue
+                    TimeUnit.SECONDS.sleep(10);
+                    Integer in = blQue1.poll(10, TimeUnit.SECONDS); // CHANGE 4 TO 2 TO SEE THAT THE VALUE IS NOT IN THE QUEUE AFTER 2 SECONDS
                     System.out.println("The element from the queue has been removed = " + in);
                 } catch(java.lang.InterruptedException e) {
                     throw new RuntimeException(e);
@@ -44,9 +46,23 @@ public class ConcurrentCollectionsTest {
             service.submit(() -> {
                 try {
                     System.out.println("Putting 1 in the queue...");
-                    TimeUnit.SECONDS.sleep(10);
-                    blQue1.put(1);
-                    System.out.println("1 has successfully put in the queue.");
+                    TimeUnit.SECONDS.sleep(3);
+                    // blQue1.put(1); // this runs continuously until there is available space in BlockingQueue or an InterruptedException occurs
+                    boolean offered = blQue1.offer(1, 3, TimeUnit.SECONDS);
+                    if (offered) {
+                        System.out.println("1 has successfully put in the queue.");
+                    } else {
+                        System.out.println("1 couldn't be offered in the blocking queue.");
+                    }
+
+
+                    System.out.println("Putting 2 in the queue...");
+                    offered = blQue1.offer(2, 3, TimeUnit.SECONDS);
+                    if (offered) {
+                        System.out.println("2 has successfully put in the queue.");
+                    } else {
+                        System.out.println("2 couldn't be offered in the blocking queue.");
+                    }
                 } catch(java.lang.InterruptedException e) {
                     throw new RuntimeException(e);
                 }
