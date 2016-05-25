@@ -11,8 +11,20 @@ public class SheepManager {
 
     private AtomicInteger sheepCount = new AtomicInteger(0);
 
+    private int sheepCount1;
+
     private void incrementAndReport() {
         System.out.print((sheepCount.incrementAndGet()) + " ");
+    }
+
+    private void syncIncrementAndReport1() {
+        synchronized(this) {
+            System.out.print(++sheepCount1 + " ");
+        }
+    }
+
+    private synchronized void syncIncrementAndReport2() {
+        System.out.print(++sheepCount1 + " ");
     }
 
     private void addAndReport(int add) {
@@ -31,7 +43,9 @@ public class SheepManager {
             for(int i = 0; i < 10; i++) {
                 // service.submit(() -> manager.incrementAndReport());
                 // service.submit(() -> manager.addAndReport(2));
-                service.submit(() -> manager.updateAndReport(e -> ++e));
+                // service.submit(() -> manager.updateAndReport(e -> ++e));
+                // service.submit(() -> manager.syncIncrementAndReport1());
+                service.submit(() -> manager.syncIncrementAndReport2());
             }
         } finally {
             if(service != null) {
