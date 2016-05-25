@@ -21,10 +21,34 @@ public class ConcurrentCollectionsTest {
     }
 
     public static void main(String... args) {
-        testBlockingQueue();
+        testSkipList();
+
+
+        // testBlockingQueue();
         // testConcQueue();
         // testConcDeque();
         // testConcMap();
+    }
+
+    private static void testSkipList() {
+        NavigableSet<Integer> sortedAges = new ConcurrentSkipListSet<>(Comparator.reverseOrder());
+
+        ExecutorService service = null;
+        try {
+            service = Executors.newCachedThreadPool();
+            for (int i = 0; i < 10; i++) {
+                service.submit(() -> sortedAges.add(new Random().nextInt(100)));
+            }
+            TimeUnit.SECONDS.sleep(3);
+            service.submit(() -> sortedAges.forEach(System.out::println));
+        } catch (java.lang.InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
+            if (service !=  null) {
+                service.shutdown();
+            }
+        }
+
     }
 
     private static void testBlockingQueue() {
