@@ -21,6 +21,33 @@ public class ConcurrentCollectionsTest {
     }
 
     public static void main(String... args) {
+        // testConcQueue();
+        testConcDeque();
+        // testConcMap();
+
+    }
+
+    private static void testConcDeque() {
+        Deque<Integer> deq1 = new ConcurrentLinkedDeque<>();
+        deq1.push(1);
+        deq1.offerFirst(2);
+        Integer second = deq1.poll();
+        System.out.println("second = " + second);
+        Integer first = deq1.peek();
+        System.out.println("Peeked first = " + first);
+        first = deq1.poll();
+        System.out.println("first = " + first);
+
+        Integer third = deq1.peek();
+        System.out.println("Peeked third: " + third);
+        third = deq1.poll();
+        System.out.println("Polled third: " + third);
+
+        third = deq1.pop(); // pop is removeFirst and removeXXX throws exception when the deque is empty.
+        System.out.println("Popped third: " + third);
+    }
+
+    private static void testConcMap() {
         ExecutorService service = null;
         try {
             service = Executors.newFixedThreadPool(10);
@@ -61,7 +88,23 @@ public class ConcurrentCollectionsTest {
         for(String key: animalFood.keySet()) {
             animalFood.remove(key); // java.util.ConcurrentModificationException
         }
+    }
 
+    private static void testConcQueue() {
+        Queue<Integer> que1 = new ConcurrentLinkedQueue<>();
+        que1.offer(1);
+        que1.offer(3);
+        Integer first = que1.peek();
+        System.out.println("Peek first = " + first);
+        first = que1.poll();
+        System.out.println("Polled first = " + first);
+        Integer second = que1.poll();
+        System.out.println("second = " + second);
+
+        Integer third = que1.peek();
+        System.out.println("Peek third = " + third);
+        third = que1.poll();
+        System.out.println("Poll third = " + third);
     }
 
 }
