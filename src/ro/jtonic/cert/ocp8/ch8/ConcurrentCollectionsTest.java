@@ -21,10 +21,42 @@ public class ConcurrentCollectionsTest {
     }
 
     public static void main(String... args) {
+        testBlockingQueue();
         // testConcQueue();
-        testConcDeque();
+        // testConcDeque();
         // testConcMap();
+    }
 
+    private static void testBlockingQueue() {
+        BlockingQueue<Integer> blQue1 = new LinkedBlockingQueue<>();
+
+        ExecutorService service = null;
+        try {
+            service = Executors.newCachedThreadPool();
+            service.submit(() -> {
+                try {
+                    Integer in = blQue1.take();
+                    System.out.println("The element from the queue has been removed = " + in);
+                } catch(java.lang.InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            });
+            service.submit(() -> {
+                try {
+                    System.out.println("Putting 1 in the queue...");
+                    TimeUnit.SECONDS.sleep(10);
+                    blQue1.put(1);
+                    System.out.println("1 has successfully put in the queue.");
+                } catch(java.lang.InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+
+            });
+        } finally {
+            if (service != null) {
+                service.shutdown();
+            }
+        }
     }
 
     private static void testConcDeque() {
@@ -43,8 +75,28 @@ public class ConcurrentCollectionsTest {
         third = deq1.poll();
         System.out.println("Polled third: " + third);
 
-        third = deq1.pop(); // pop is removeFirst and removeXXX throws exception when the deque is empty.
-        System.out.println("Popped third: " + third);
+        // third = deq1.pop(); // pop is removeFirst and removeXXX throws exception when the deque is empty. java.util.NoSuchElementException
+        // System.out.println("Popped third: " + third);
+
+        deq1.push(1);
+        deq1.push(2);
+        deq1.push(3);
+
+        ExecutorService service = null;
+        try {
+            service = Executors.newCachedThreadPool();
+            for(int i = 0; i < 3; i++) {
+                service.submit(() -> {
+                    Integer in = deq1.poll();
+                    System.out.println("in = " + in);
+                });
+            }
+        } finally {
+            if (service != null) {
+                service.shutdown();
+            }
+        }
+
     }
 
     private static void testConcMap() {
