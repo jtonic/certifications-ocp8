@@ -21,13 +21,36 @@ public class ConcurrentCollectionsTest {
     }
 
     public static void main(String... args) {
-        testSkipList();
-
-
+        testCopyOnWrite();
+        // testSkipList();
         // testBlockingQueue();
         // testConcQueue();
         // testConcDeque();
         // testConcMap();
+    }
+
+    private static void testCopyOnWrite() {
+        List<Integer> lst = new CopyOnWriteArrayList<>(Arrays.asList(1, 2, 3));
+        for (Integer i: lst) {
+            System.out.print(i + " ");
+            lst.add(4);
+        }
+        System.out.println("\nlist size: " + lst.size());
+
+        Set<Integer> set = new CopyOnWriteArraySet<>(Arrays.asList(1, 2, 3, 3, 4));
+        for (Integer i: set) {
+            System.out.print(i + " ");
+            set.add(5);
+        }
+        System.out.println("\n set size: " + set.size());
+
+        // This will throw java.util.ConcurrentModificationException
+        List<Integer> lst2 = new ArrayList<>(Arrays.asList(1, 2, 3));
+        for (Integer i: lst2) {
+            System.out.print(i + " ");
+            lst2.add(4);
+        }
+        System.out.print("lst2 size: " + lst2.size());
     }
 
     private static void testSkipList() {
