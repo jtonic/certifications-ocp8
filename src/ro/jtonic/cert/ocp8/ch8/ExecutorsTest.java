@@ -47,13 +47,13 @@ public class ExecutorsTest {
                         return "task 4";
                     }
             ));
-            List<Future<String>> executedTasks = service.invokeAll(tasks);
-            System.out.println("executedTasks.size()= " + executedTasks.size());
-
-            executedTasks.forEach(t -> System.out.println(t.isDone()));
+            String executedTask = service.invokeAny(tasks);
+            System.out.println("executedTask result: " + executedTask);
             System.out.println("End");
-        } catch (java.lang.InterruptedException e) {
+        } catch (java.util.concurrent.ExecutionException e) {
             System.out.println("An interrupted exception has been thrown. message is: " + e.getMessage());
+            throw new RuntimeException(e);
+        } catch(java.lang.InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
             if (service != null) {
