@@ -8,6 +8,10 @@ import java.util.*;
 public class SchedulingTaskTest2 {
 
     public static void main(String... args) throws java.lang.InterruptedException {
+
+        System.out.println("Available processors: " + java.lang.Runtime.getRuntime().availableProcessors());
+        System.exit(0);
+
         ScheduledExecutorService scheduledService = null;
         try {
             System.out.println("Begin.");
