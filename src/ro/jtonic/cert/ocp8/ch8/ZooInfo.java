@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class ZooInfo {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws java.lang.InterruptedException {
         ExecutorService service = null;
         try {
             System.out.println("begin");
@@ -23,9 +23,15 @@ public class ZooInfo {
             System.out.println("end");
         } finally {
             if (service != null) {
-                // service.shutdown();
-                List<Runnable> unfinishedTasks = service.shutdownNow();
-                System.out.println("unfinishedTasks.size() = " + unfinishedTasks.size());
+                service.shutdown();
+                boolean serviceTerminated = service.awaitTermination(1, TimeUnit.MINUTES);
+                if (serviceTerminated) {
+                    System.out.println("All tasks are finished.");
+                } else {
+                    System.out.println("At least one task is still running...");
+                }
+                // List<Runnable> unfinishedTasks = service.shutdownNow();
+                // System.out.println("unfinishedTasks.size() = " + unfinishedTasks.size());
 
                 System.out.println("checking the isShutdown and isTerminated on the executor service...");
                 System.out.println("service.isShutdown() = " + service.isShutdown());
