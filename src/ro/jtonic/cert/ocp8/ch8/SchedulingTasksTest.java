@@ -11,9 +11,10 @@ public class SchedulingTasksTest {
         try {
             System.out.println("Begin");
             scheduledService = Executors.newSingleThreadScheduledExecutor();
-            ScheduledFuture<?> future = scheduledService.schedule(
+            ScheduledFuture<String> future = scheduledService.schedule(
                     () -> {
                         System.out.println("Executed after a specified time interval.");
+                        return "delayed task 1";
                     }
                     , 4, TimeUnit.SECONDS);
             TimeUnit.SECONDS.sleep(5);
