@@ -12,8 +12,8 @@ public class SchedulingTaskTest2 {
         try {
             System.out.println("Begin.");
             scheduledService = Executors.newSingleThreadScheduledExecutor();
-            ScheduledFuture<?> future = scheduledService.scheduleAtFixedRate(() -> {
-                System.out.println("Executed periodically at fixed rate.");
+            ScheduledFuture<?> future = scheduledService.scheduleWithFixedDelay(() -> {
+                System.out.println("Executed periodically at/with fixed rate/delay.");
             }, 3, 5,TimeUnit.SECONDS);
             TimeUnit.SECONDS.sleep(5);
             System.out.println("future.getDelay(TimeUnit.SECONDS) = " + future.getDelay(TimeUnit.SECONDS));
