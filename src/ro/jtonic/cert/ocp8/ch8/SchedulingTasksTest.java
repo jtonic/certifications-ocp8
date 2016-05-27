@@ -15,8 +15,8 @@ public class SchedulingTasksTest {
                     () -> {
                         System.out.println("Executed after a specified time interval.");
                     }
-                    , 10, TimeUnit.SECONDS);
-            TimeUnit.SECONDS.sleep(4);
+                    , 4, TimeUnit.SECONDS);
+            TimeUnit.SECONDS.sleep(5);
             System.out.println("Future's delay: " + future.getDelay(TimeUnit.SECONDS));
 
             System.out.println("End");
