@@ -6,7 +6,7 @@ import java.util.concurrent.*;
  */
 public class SchedulingTasksTest {
 
-    public static void main(String... arfs) throws java.lang.InterruptedException {
+    public static void main(String... arfs) throws java.lang.InterruptedException, java.util.concurrent.ExecutionException {
         ScheduledExecutorService scheduledService = null;
         try {
             System.out.println("Begin");
@@ -19,6 +19,8 @@ public class SchedulingTasksTest {
             TimeUnit.SECONDS.sleep(5);
             System.out.println("Future's delay: " + future.getDelay(TimeUnit.SECONDS));
 
+            Object result = future.get();
+            System.out.println("Result: " + result);
             System.out.println("End");
         } finally {
             if (scheduledService != null) {
