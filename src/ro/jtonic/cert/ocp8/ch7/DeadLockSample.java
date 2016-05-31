@@ -1,6 +1,5 @@
-package ro.jtonic.cert.ocp8.ch8;
+package ro.jtonic.cert.ocp8.ch7;
 
-import java.util.*;
 import java.util.concurrent.*;
 /**
  * Created by antonelpazargic on 24/05/16.
