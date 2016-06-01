@@ -1,3 +1,5 @@
+package ro.jtonic.cert.ocp8.ch8;
+
 import java.io.*;
 import java.util.*;
 
@@ -5,8 +7,8 @@ public class FileSample {
 
 	public static void main(String... args) {
 		File file1 = new File("/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8/Zoo1.txt");
-		System.console().writer().println(file1.exists());
-		File file2 = new File("/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8"); 
+		System.out.println("file1.exists()? " + file1.exists());
+		File file2 = new File("/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8");
 		System.out.println("file2.exists? " + file2.exists());
 		System.out.println("file2.isDirectory? " + file2.isDirectory());
 		System.out.println("file2.getName() " + file2.getName());
@@ -32,6 +34,10 @@ public class FileSample {
 				System.out.println("Was the " + fooDir1.getAbsolutePath() + " successfully deleted? " + deleted);
 			}
 		}
+
+		System.out.println("Show all the files and directories contains in the directory " + file2.getAbsolutePath());
+		System.out.println("=========================");
+		Arrays.asList(file2.listFiles() == null? new File[0]: file2.listFiles()).forEach(f -> System.out.println(f.getName()));
 
 	}		
 
