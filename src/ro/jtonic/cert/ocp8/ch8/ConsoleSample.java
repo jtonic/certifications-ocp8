@@ -1,4 +1,4 @@
-package ro.jtonic.cert.ocp8.ch8;
+// package ro.jtonic.cert.ocp8.ch8;
 
 import java.io.*;
 /**
@@ -6,13 +6,16 @@ import java.io.*;
  */
 public class ConsoleSample {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws IOException {
         Console console = System.console();
         if (console == null) {
             throw new RuntimeException("Console is not supported by the OS");
         }
+	    PrintWriter writer = console.writer();
         String userIn = console.readLine();
-        console.writer().println("You entered the following: " + userIn);
+        writer.println("You entered the following: " + userIn);
+        ((Writer)writer).append(".And you know that very well.\n");
+	    writer.flush();
     }
 
 }
