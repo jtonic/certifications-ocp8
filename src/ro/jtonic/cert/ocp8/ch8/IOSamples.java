@@ -29,10 +29,13 @@ public class IOSamples {
     }
 
     private static void testMark() throws FileNotFoundException, IOException {
-        try (InputStream is = new FileInputStream(FILE_NAME)) {
+        try (Reader is = new StringReader("Antonel")) {
             System.out.print((char)is.read());
             if (is.markSupported()) {
+                System.out.println("Mark is supported for the StringReader.");
                 is.mark(4);
+                System.out.print((char) is.read());
+                System.out.print((char) is.read());
                 System.out.print((char) is.read());
                 System.out.print((char) is.read());
                 System.out.print((char) is.read());
