@@ -9,9 +9,13 @@ public class IOSamples {
     private static final String FILE_NAME = "/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8/Zoo.txt";
     private static final String NEW_FILE_NAME = "/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8/Zoo1.txt";
 
+    private static final File FILE1 = new File(FILE_NAME);
+    private static final File FILE2 = new File(NEW_FILE_NAME);
+
     public static void main(String... args) throws IOException {
-        copy(FILE_NAME, NEW_FILE_NAME);
+        bufferedCopy(FILE1, FILE2);
         System.exit(0);
+        copy(FILE_NAME, NEW_FILE_NAME);
         testSkip();
         testMark();
 
@@ -27,6 +31,21 @@ public class IOSamples {
                 System.out.println(line);
             }
         }
+    }
+
+    private static void bufferedCopy(File from, File to) throws FileNotFoundException, IOException {
+        try (
+                InputStream is = new BufferedInputStream(new FileInputStream(from));
+                OutputStream os = new BufferedOutputStream(new FileOutputStream(to))
+        ) {
+            byte[] buffer = new byte[1024];
+            int readBytesNo;
+            while ((readBytesNo = is.read(buffer)) != -1) {
+                os.write(buffer, 0, readBytesNo);
+                os.flush();
+            }
+        }
+        System.out.printf("The file %s has been successfully copied to %s.", from.getName(), to.getName());
     }
 
     private static void copy(String from, String to) throws FileNotFoundException, IOException {
