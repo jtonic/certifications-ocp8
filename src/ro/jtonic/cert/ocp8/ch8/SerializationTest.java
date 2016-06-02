@@ -9,7 +9,9 @@ public class SerializationTest {
 
     private static final File FILE = new File("/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch8/animals_data.txt");
 
-    private static class Zoo {
+    private static class Zoo implements Serializable {
+        public static final long serialVersionUID = 1L;
+
         private String name;
 
         public Zoo(String name) {
@@ -65,7 +67,7 @@ public class SerializationTest {
 
         @Override
         public String toString() {
-            return "Animal [name=" + name + ", age=" + age + ", type= " + type + "]";
+            return "Animal [name=" + name + ", age=" + age + ", type= " + type + ", zoo= " + this.zoo + "]";
         }
     }
 
