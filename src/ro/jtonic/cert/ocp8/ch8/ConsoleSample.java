@@ -15,6 +15,10 @@ public class ConsoleSample {
         String userIn = console.readLine();
         writer.println("You entered the following: " + userIn);
         ((Writer)writer).append(".And you know that very well.\n");
+
+        // console doesn't contain the print method. Use console.writer to call print.
+        // console.print("Antonel said that.");
+
 	    writer.flush();
     }
 
