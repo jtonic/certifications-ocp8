@@ -21,26 +21,31 @@ public class PrintWriterTest {
         }
     }
 
-    public static void main(String... args) throws FileNotFoundException {
-        PrintWriter out = new PrintWriter(System.out);
-        out.print(5);
-        // out.write(System.getProperty("line.separator"));
-        out.print(0.5);
-        out.println();
-        out.println("Antonel is the best person ever, but he is quite selfish once in a while.");
-        Person person = new Person("Antonel");
-        out.println(person);
+    public static void main(String... args) throws FileNotFoundException, IOException {
+        try (
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(FILE)));
+        ) {
+            out.print(5);
+            // out.write(System.getProperty("line.separator"));
+            out.print(0.5);
+            out.println();
+            out.println("Antonel is the best person ever, but he is quite selfish once in a while.");
+            Person person = new Person("Antonel");
+            out.println(person);
 
-        out.write(person == null ? "null" : String.valueOf(person));
-        out.println();
+            out.write(person == null ? "null" : String.valueOf(person));
+            out.println();
 
-        System.out.println("line separator: " + System.getProperty("line.separator"));
+            out.printf("My brother %s is the best photographer in the whole world.%n", "Tutye");
+            out.format("My sister %s is the most beautiful woman in the world.%n", "Irina");
+            System.out.println("line separator: " + System.getProperty("line.separator"));
 
-        final boolean anyErrors = out.checkError();
-        if (anyErrors) {
-            System.out.println("Errors has been encountered.");
-        } else {
-            System.out.println("No print to console errors has been encountered.");
+            final boolean anyErrors = out.checkError();
+            if (anyErrors) {
+                System.out.println("Errors has been encountered.");
+            } else {
+                System.out.println("No print to console errors has been encountered.");
+            }
         }
     }
 }
