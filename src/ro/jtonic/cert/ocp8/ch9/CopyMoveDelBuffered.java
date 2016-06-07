@@ -12,7 +12,14 @@ public final class CopyMoveDelBuffered {
 	}
 	
 	private static void testDelete() throws java.io.IOException {
-		Files.delete(Paths.get("./dir1_moved"));
+		Path p1 = Paths.get("./dir_to_be_deleted_1");
+		Path p2 = Paths.get("./dir_to_be_deleted_2");
+		Path directoryToDelete = Files.createDirectory(p1);
+		Files.delete(directoryToDelete);
+
+		Path directoryToDelete2 = Files.createDirectory(p2);
+		boolean deleted = Files.deleteIfExists(directoryToDelete2);
+		System.out.println("Was the directory deleted? " + deleted);
 	}	
 
 	private static void testMove() throws java.io.IOException {
