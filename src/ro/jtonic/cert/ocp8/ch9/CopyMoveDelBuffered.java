@@ -1,14 +1,35 @@
+import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.nio.charset.*;
 
 public final class CopyMoveDelBuffered {
 
 	public static void main(String... args) throws IOException {
-		testDelete();
+		testReadFile1();
 		System.exit(0);
+		testReadFile();
+		testDelete();
 		testMove();
 		testCopyUsingIo();
 		testCopy();
+	}
+
+	private static void testReadFile1() throws java.io.IOException {
+		try (BufferedReader r = Files.newBufferedReader(Paths.get("./dir1_moved/Test2.txt"), Charset.forName("US-ASCII"))) {
+			String currentLine = null;
+			while ((currentLine = r.readLine()) != null) {
+				System.out.println(currentLine);
+			}
+		}
+	}
+
+	private static void testReadFile() throws java.io.IOException {
+		Path p = Paths.get("./dir1_moved/Test2.txt");
+		List<String> lines = Files.readAllLines(p);
+		for (String line: lines) {
+			System.out.println(line);
+		}
 	}
 	
 	private static void testDelete() throws java.io.IOException {
