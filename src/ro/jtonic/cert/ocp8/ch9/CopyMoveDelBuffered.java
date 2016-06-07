@@ -16,6 +16,7 @@ public final class CopyMoveDelBuffered {
 		Path p4 = FileSystems.getDefault().getPath("./dir1/Test2_copy.txt");
 
 		Path p5 = Paths.get("./dir1");
+		Path p51 = Paths.get("./dir12");
 		Path p6 = Paths.get("./dir1_copy");
 
 		// Files.copy(p1, p2);
@@ -39,6 +40,9 @@ public final class CopyMoveDelBuffered {
 
 		Path copiedDir = Files.copy(p5, p6, StandardCopyOption.REPLACE_EXISTING);
 		System.out.println("Copied directory: " + copiedDir.toAbsolutePath().normalize());
+
+		Path copiedDir1 = Files.copy(p51, p6, StandardCopyOption.REPLACE_EXISTING);
+		System.out.println("Copied directory: " + copiedDir1.toAbsolutePath().normalize());
 	}
 
 }
