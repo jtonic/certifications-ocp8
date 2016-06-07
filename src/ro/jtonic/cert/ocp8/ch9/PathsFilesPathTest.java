@@ -38,8 +38,8 @@ public final class PathsFilesPathTest {
 	} 
 	
 	private static void test3() throws java.io.IOException {
-		Path p1 = Paths.get("/animals/reptiles/./snake");
-		Path p2 = Paths.get("../crocodile");
+		Path p1 = Paths.get("/reptiles/snakes/cobra");
+		Path p2 = Paths.get("/reptiles/snakes/./boa");
 		Path p3 = Paths.get("/birds/pigeon");
 		Path p10 = Paths.get("./pigeon");
 		Path p12 = Paths.get("/Users/antonelpazargic/jtonic/git/github/certifications-ocp8/src/ro/jtonic/cert/ocp8/ch9/dir1/./Test2.txt");
@@ -55,7 +55,6 @@ public final class PathsFilesPathTest {
 		System.out.println("p3 = " + p3);
 	
 		System.out.println("Normalized paths: ");
-		System.out.println("===================");
 		System.out.println("p1: " + p1.normalize());
 		System.out.println("p11: " + p11.normalize());
 		System.out.println("p12: " + p12.normalize());
