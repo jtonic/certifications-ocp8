@@ -4,9 +4,30 @@ import java.nio.file.*;
 public final class CopyMoveDelBuffered {
 
 	public static void main(String... args) throws IOException {
-		testCopy();
-
+		testDelete();
 		System.exit(0);
+		testMove();
+		testCopyUsingIo();
+		testCopy();
+	}
+	
+	private static void testDelete() throws java.io.IOException {
+		Files.delete(Paths.get("./dir1_moved"));
+	}	
+
+	private static void testMove() throws java.io.IOException {
+		Path p1 = Files.move(Paths.get("./dir1"), Paths.get("./dir1_moved"));	
+		System.out.println("The path of the moved file: " + p1.toAbsolutePath().normalize());
+	}
+
+	private static void testCopyUsingIo() throws java.io.FileNotFoundException, java.io.IOException {
+		try (
+			InputStream is = new FileInputStream("./CopyMoveDelBuffered.lnk");
+			OutputStream os = new FileOutputStream("./CopyMoveDelBuffered.copy.1")
+		) {
+			Files.copy(is, Paths.get("./CopyMoveDelBuffered.tmp"));
+			Files.copy(Paths.get("./CopyMoveDelBuffered.tmp"), os);
+		} 
 	}
 
 	private static void testCopy() throws IOException {
@@ -40,6 +61,12 @@ public final class CopyMoveDelBuffered {
 
 		Path copiedDir = Files.copy(p5, p6, StandardCopyOption.REPLACE_EXISTING);
 		System.out.println("Copied directory: " + copiedDir.toAbsolutePath().normalize());
+
+		System.out.println("Copy a link file.");
+		Path p7 = Paths.get("./CopyMoveDelBuffered.lnk");
+		Path p8 = Paths.get("./CopyMoveDelBuffered.copy");
+		Path p9 = Files.copy(p7, p8, StandardCopyOption.REPLACE_EXISTING, LinkOption.NOFOLLOW_LINKS);
+		System.out.println("Copied symbolic link file: " + p9.normalize());
 
 		Path copiedDir1 = Files.copy(p51, p6, StandardCopyOption.REPLACE_EXISTING);
 		System.out.println("Copied directory: " + copiedDir1.toAbsolutePath().normalize());
