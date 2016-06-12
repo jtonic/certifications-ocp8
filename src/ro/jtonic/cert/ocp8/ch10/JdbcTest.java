@@ -12,18 +12,8 @@ public final class JdbcTest {
 			Connection con = DriverManager.getConnection(url, "ch10", "ch10");
 			Statement stm = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 		) {
-			boolean isResultSet = stm.execute("delete from species where name = 'snake'");
-			if (isResultSet) {	
-				ResultSet rs = stm.getResultSet();
-				System.out.println("A query was executed");
-				System.out.println("=================");
-				while (rs.next()) {
-					System.out.println(rs.getString(2));
-				}
-			} else {
-				int affectedRows = stm.getUpdateCount();
-				System.out.println("The affected rows: " + affectedRows);
-			}
+			int updateCount = stm.executeUpdate("insert into species (name, num_acres) values ('Snake', 1.3)");
+			System.out.println("update count: " + updateCount);		
 		}
 	}
 }
