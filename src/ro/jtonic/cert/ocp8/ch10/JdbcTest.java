@@ -12,7 +12,7 @@ public final class JdbcTest {
 			Connection con = DriverManager.getConnection(url, "ch10", "ch10");
 			Statement stm = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
 		) {
-			boolean isResultSet = stm.execute("select id, name, num_acres from species");
+			boolean isResultSet = stm.execute("insert into species (name, num_acres) values ('snake', 1.2)");
 			if (isResultSet) {	
 				ResultSet rs = stm.getResultSet();
 				System.out.println("A query was executed");
