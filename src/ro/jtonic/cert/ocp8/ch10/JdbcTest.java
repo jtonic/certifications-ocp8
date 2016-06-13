@@ -11,9 +11,16 @@ public final class JdbcTest {
 		try (	
 			Connection con = DriverManager.getConnection(url, "ch10", "ch10");
 			Statement stm = con.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_READ_ONLY);
+			ResultSet rs = stm.executeQuery("select name, date_born, id from animals");
 		) {
-			int updateCount = stm.executeUpdate("insert into species (name, num_acres) values ('Snake', 1.3)");
-			System.out.println("update count: " + updateCount);		
+			if (rs.next()) {
+					System.out.println(rs.getTime(2).toLocalTime());
+					System.out.println(rs.getDate(2).toLocalDate());
+					System.out.println(rs.getTimestamp(2).toLocalDateTime());
+
+					int id = (Integer) rs.getObject("id");
+					System.out.println("id = " + id);
+			}
 		}
 	}
 }
