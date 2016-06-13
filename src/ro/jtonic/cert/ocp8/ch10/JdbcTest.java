@@ -1,5 +1,6 @@
 
 import java.sql.*;
+import java.time.*;
 
 public final class JdbcTest {
 
@@ -18,8 +19,8 @@ public final class JdbcTest {
 					System.out.println(rs.getDate(2).toLocalDate());
 					System.out.println(rs.getTimestamp(2).toLocalDateTime());
 
-					int id = (Integer) rs.getObject("id");
-					System.out.println("id = " + id);
+					LocalDateTime birthDate = ((Timestamp) rs.getObject("date_born")).toLocalDateTime();
+					System.out.println("birth date = " + birthDate);
 			}
 		}
 	}
